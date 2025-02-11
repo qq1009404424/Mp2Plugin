@@ -1,0 +1,11 @@
+{
+  "CustomModule": {
+      "name": "自定义模块",
+      "description": "加载修改后的模块。",
+      "labels": "模块",
+      "version": "1.0",
+      "icon": "world.png",
+      "author": "xly1009",
+      "level": 2
+  }
+}
