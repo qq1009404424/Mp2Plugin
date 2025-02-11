@@ -42,11 +42,12 @@ class CustomModule(_PluginBase):
     # 可使用的用户级别
     auth_level = 1
 
-
+    _onlyonce = False
 
     def init_plugin(self, config: dict = None):
         if not config:
             return
+        _onlyonce=config.get("onlyonce")
 		if self._onlyonce:
 			self.execute()
 
