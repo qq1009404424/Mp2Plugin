@@ -39,7 +39,6 @@ class CustomModule(_PluginBase):
         if not config:
             return
         self._onlyonce=config.get("onlyonce")
-        logger.info(f"CustomModule OnlyOnce:{self._onlyonce}")
         if self._onlyonce:
             self.execute()
 
@@ -192,7 +191,6 @@ class CustomModule(_PluginBase):
         执行用户任务。如果用户任务不存在，则记录错误日志并发送系统通知
         """
 
-        logger.info(f"开始执行任务")
         modulemanage=ModuleManager()
         modules = ModuleHelper.load(
             "app.plugins.custommodule.modules",
