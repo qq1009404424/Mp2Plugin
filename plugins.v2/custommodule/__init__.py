@@ -1,23 +1,13 @@
-import importlib.util
-import os
-import sys
+
 import threading
-from datetime import datetime, timedelta
-from pathlib import Path
-from threading import Event
 from typing import Any, List, Dict, Tuple, Optional
 
-import pytz
-from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.triggers.cron import CronTrigger
-
 from app.core.module import ModuleManager
-from app.schemas.types import ModuleType, OtherModulesType
-from app.plugins.customplugin.task import UserTaskBase
 from app.helper.module import ModuleHelper
 
 from app.core.config import settings
 from app.log import logger
+from app.plugins import _PluginBase
 
 lock = threading.Lock()
 
@@ -43,13 +33,15 @@ class CustomModule(_PluginBase):
     auth_level = 1
 
     _onlyonce = False
+    _enabled = True
 
     def init_plugin(self, config: dict = None):
         if not config:
             return
-        _onlyonce=config.get("onlyonce")
+        self._onlyonce=config.get("onlyonce")
+        logger.info(f"CustomModule OnlyOnce:{self._onlyonce}")
         if self._onlyonce:
-			self.execute()
+            self.execute()
 
     def get_state(self):
         return self._enabled
@@ -134,16 +126,6 @@ class CustomModule(_PluginBase):
         }]
         """
         services = []
-
-        if self._enabled and self._cron:
-            services.append({
-                "id": f"{CustomModule.__name__}",
-                "name": f"{self.plugin_name}",
-                "trigger": CronTrigger.from_crontab(self._cron),
-                "func": self.execute,
-                "kwargs": {}
-            })
-
         return services
 
     def stop_service(self):
@@ -156,7 +138,8 @@ class CustomModule(_PluginBase):
         """
         执行用户任务。如果用户任务不存在，则记录错误日志并发送系统通知
         """
-		
+
+        logger.info(f"开始执行任务")
         modulemanage=ModuleManager()
         modules = ModuleHelper.load(
             "app.plugins.custommodule.modules",
@@ -173,8 +156,8 @@ class CustomModule(_PluginBase):
                 modulemanage._running_modules[module_id] = _module
                 logger.info(f"Moudle Loaded：{module_id}")
             except Exception as err:
-                logger.error(f"Load Moudle Error：{module_id}，{str(err)} - {traceback.format_exc()}", exc_info=True)
-		pass
+                logger.error(f"Load Moudle Error：{module_id}，{str(err)} ", exc_info=True)
+        pass
 
     def __log_and_notify_error(self, message):
         """
