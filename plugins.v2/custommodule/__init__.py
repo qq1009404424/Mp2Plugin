@@ -118,9 +118,38 @@ class CustomModule(_PluginBase):
                                             'type': 'info',
                                             'variant': 'tonal',
                                             'text': '修改筛选器：FIFTY 50% DOUBLE 2x FREE 免费 '
-													'规则：'
-                                                    '只搜索免费 2x免费  FREE & DOUBLE > FREE > FIFTY'
-                                                    '只搜索免费 2x免费 50%的种子 FREE & DOUBLE > FREE > FIFTY & DOUBLE > FIFTY '
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                'component': 'VCol',
+                                'props': {
+                                    'cols': 12,
+                                },
+                                'content': [
+                                    {
+                                        'component': 'VAlert',
+                                        'props': {
+                                            'type': 'info',
+                                            'variant': 'tonal',
+                                            'text': '只搜索免费 2x免费  FREE & DOUBLE > FREE > FIFTY'
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                'component': 'VCol',
+                                'props': {
+                                    'cols': 12,
+                                },
+                                'content': [
+                                    {
+                                        'component': 'VAlert',
+                                        'props': {
+                                            'type': 'info',
+                                            'variant': 'tonal',
+                                            'text': '只搜索免费 2x免费 50%的种子 FREE & DOUBLE > FREE > FIFTY & DOUBLE > FIFTY '
                                         }
                                     }
                                 ]
