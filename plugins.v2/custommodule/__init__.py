@@ -48,7 +48,7 @@ class CustomModule(_PluginBase):
         if not config:
             return
         _onlyonce=config.get("onlyonce")
-		if self._onlyonce:
+        if self._onlyonce:
 			self.execute()
 
     def get_state(self):
@@ -137,7 +137,7 @@ class CustomModule(_PluginBase):
 
         if self._enabled and self._cron:
             services.append({
-                "id": f"{CustomPlugin.__name__}",
+                "id": f"{CustomModule.__name__}",
                 "name": f"{self.plugin_name}",
                 "trigger": CronTrigger.from_crontab(self._cron),
                 "func": self.execute,
@@ -150,7 +150,7 @@ class CustomModule(_PluginBase):
         """
         退出插件
         """
-		pass
+        pass
 
     def execute(self):
         """
