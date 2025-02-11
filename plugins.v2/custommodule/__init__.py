@@ -115,8 +115,7 @@ class CustomModule(_PluginBase):
         ], {
             "enabled": False,
             "notify": True,
-            "only_once": False,
-            "user_code": self.__get_demo_code()
+            "only_once": False
         }
 
     def get_page(self) -> List[dict]:
