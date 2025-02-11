@@ -1,7 +1,7 @@
 {
   "CustomModule": {
       "name": "自定义模块",
-      "description": "加载修改后的模块。",
+      "description": "修改过滤器模块,支持50%和2x。",
       "labels": "模块",
       "version": "1.0",
       "icon": "world.png",
